@@ -27,7 +27,7 @@ class ProductPage(BasePage):
             *ProductPageLocators.SUCCESS_MESSAGE
         ).text
         assert (
-            expected_name in success_message
+            expected_name == success_message
         ), "Название товара не совпадает в сообщении об успехе"
 
     def should_be_basket_price_equal_to_product_price(self, expected_price):
@@ -40,3 +40,13 @@ class ProductPage(BasePage):
         assert (
             expected_price == basket_price
         ), "Цена в корзине не совпадает с ценой товара"
+
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(
+            *ProductPageLocators.SUCCESS_MESSAGE
+        ), "Сообщение об успехе отображается, но не должно"
+
+    def should_success_message_disappear(self):
+        assert self.is_disappeared(
+            *ProductPageLocators.SUCCESS_MESSAGE
+        ), "Сообщение об успехе не исчезло, хотя должно"
