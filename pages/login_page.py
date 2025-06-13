@@ -36,3 +36,8 @@ class LoginPage(BasePage):
         password_input1.send_keys(password)
         password_input2.send_keys(password)
         register_button.click()
+
+    def should_be_login_url(self):
+        assert (
+            "accounts/login/" in self.browser.current_url
+        ), "URL does not contain login path"
